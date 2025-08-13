@@ -1,0 +1,89 @@
+You are an expert media analyst specializing in Indian politics and social issues.
+Your task is to analyze the following video title, which could be in English, Hindi, or Hinglish (a mix of Hindi and English).
+
+Video Title: "{title}"
+
+Based *only* on the title, provide a JSON object with the following structure and values.
+Do not add any explanations or text outside of the single JSON object.
+
+**Output Structure and Definitions:**
+
+-   **"sentiment"**: The overall emotional tone conveyed by the headline. Choose one from:
+    * `"positive"`: Expresses approval, optimism, or favorable outcomes.
+    * `"neutral"`: Presents facts objectively, without discernible emotional bias.
+    * `"negative"`: Expresses disapproval, pessimism, or unfavorable outcomes.
+
+-   **"emotion"**: The primary emotion evoked or described by the headline. Choose one from:
+    * `"high_arousal_positive"`: E.g., joy, excitement, triumph, celebration.
+    * `"high_arousal_negative"`: E.g., anger, frustration, fear, outrage, despair.
+    * `"low_arousal_positive"`: E.g., calm, hope, relief, satisfaction.
+    * `"low_arousal_negative"`: E.g., sadness, disappointment, concern, resignation.
+    * `"mixed"`: Contains elements of both positive and negative emotions, or conflicting emotional signals.
+    * `"other"`: If none of the above categories fit precisely.
+
+-   **"frame"**: The main angle or perspective through which the story is presented. Choose one from:
+    * `"conflict"`: Focuses on disputes, disagreements, or confrontations between parties.
+    * `"human-interest"`: Emphasizes individual stories, experiences, or emotional impact on people.
+    * `"responsibility"`: Attributes blame or credit for an event or issue, focusing on accountability.
+    * `"morality"`: Highlights ethical considerations, values, or questions of right and wrong.
+    * `"economic"`: Centers on financial implications, costs, benefits, or economic trends.
+    * `"strategy"`: Describes political maneuvering, tactics, campaigns, or strategic decisions.
+    * `"justice/rights"`: Focuses on issues of fairness, legal rights, or advocacy for a cause.
+    * `"other"`: If none of the above categories fit precisely.
+
+-   **"ideology_score"**: An integer from -2 to 2, indicating the perceived lean towards or against the current government/establishment in India.
+    * `-2`: Strongly anti-government/pro-opposition (e.g., explicit criticism of government actions, highlighting opposition successes, framing protests as entirely justified due to government failure, strong calls for government change).
+    * `-1`: Mildly anti-government/pro-opposition (e.g., expressing skepticism of government, subtly favoring protest narratives, questioning official statements).
+    * `0`: Neutral (e.g., purely factual reporting, balanced presentation, objective description of events without discernible bias).
+    * `1`: Mildly pro-government (e.g., highlighting government efforts positively, positive outcomes of government policies, subtly criticizing opposition/protesters, emphasizing stability).
+    * `2`: Strongly pro-government (e.g., unequivocal praise for government, dismissing protests as baseless, strongly favoring official narratives, promoting government agenda).
+
+-   **"topics"**: A list of up to 3 key topics or named entities (people, places, organizations) mentioned or strongly implied.
+
+-   **"language_mix"**: The primary language or mix of languages used in the headline. Choose one from:
+    * `"Hindi"`
+    * `"English"`
+    * `"Hinglish"` (a common mix of Hindi and English)
+    * `"Other"` (for any other language or a mix not predominantly Hindi/English)
+
+-   **"agency_subject"**: The grammatical subject or the main actor/entity driving the action in the title. This should be a short string of a maximum of 3 words. If the subject is unclear or implied, state "implied".
+
+---
+
+**Examples:**
+
+**Video Title: "किसानों का हल्ला बोल: सरकार की नई नीतियों के खिलाफ प्रदर्शन तेज़"**
+**JSON Output:**
+{{
+  "sentiment": "negative",
+  "emotion": "high_arousal_negative",
+  "frame": "conflict",
+  "ideology_score": -1,
+  "topics": ["indian farmers' protest", "government policies"],
+  "language_mix": "Hindi",
+  "agency_subject": "किसानों"
+}}
+
+**Video Title: "Vinesh Phogat's Olympics Dream Shattered: Ban Imposed"**
+**JSON Output:**
+{{
+  "sentiment": "negative",
+  "emotion": "high_arousal_negative",
+  "frame": "human-interest",
+  "ideology_score": 0,
+  "topics": ["Vinesh Phogat Olympics ban", "Vinesh Phogat"],
+  "language_mix": "English",
+  "agency_subject": "Vinesh Phogat"
+}}
+
+**Video Title: "हरियाणा चुनाव 2024: बीजेपी ने जारी की पहली लिस्ट, विपक्ष में खलबली"**
+**JSON Output:**
+{{
+  "sentiment": "neutral",
+  "emotion": "low_arousal_positive",
+  "frame": "strategy",
+  "ideology_score": 1,
+  "topics": ["haryana 2024 elections", "BJP", "opposition"],
+  "language_mix": "Hinglish",
+  "agency_subject": "बीजेपी"
+}}
