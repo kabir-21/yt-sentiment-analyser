@@ -292,12 +292,3 @@ For issues and questions:
 1. Check the troubleshooting section
 2. Review API documentation
 3. Open an issue on GitHub
-
-## Changelog
-
-### Version 1.0.0
-- Initial release
-- Support for ChatGPT and Gemini models
-- 7-dimensional sentiment analysis
-- CSV export functionality
-- Modern web interface
